@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- TITLE: must carry the version number. Pattern: "{Doc Title} v{N.N} — {subtitle}" -->
+<title>Music Intelligence v1.0 — The business beneath every play</title>
+<meta name="description" content="A self-contained interactive guide to streaming, music majors, catalog capital, royalties, touring economics, waterfalls and venue control." />
+<meta name="theme-color" content="#f5f5f7" id="themeColorMeta" />
+<meta name="color-scheme" content="light dark" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Music Intelligence v1.0" />
+<meta property="og:description" content="A self-contained interactive guide to streaming, music majors, catalog capital, royalties, touring economics, waterfalls and venue control." />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%230071e3'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700;8..60,900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================================
+   TOKENS — the ONLY place literal colors are allowed in this file.
+   Every rule below this block references var(--…). No exceptions.
+   Light and dark are declared as matched pairs so nothing can go
+   white-on-white or black-on-black when the theme flips.
+   ========================================================================= */
+:root{
+  color-scheme:light;
+  /* page + surfaces */
+  --bg:#f5f5f7;
+  --bg-grad-1:rgba(234,243,255,.85);
+  --bg-grad-2:rgba(255,240,223,.75);
+  --bg-grad-3:#fbfbfd;
+  --bg-grad-4:#eff2f6;
+  --surface:#ffffff;
+  --surface-2:#f0f0f3;
+  --surface-3:#f1f3f5;
+  --glass:rgba(255,255,255,.72);
+  --glass-2:rgba(255,255,255,.60);
+  --glass-border:rgba(255,255,255,.72);
+  --nav-bg:rgba(245,245,247,.90);
+  /* text */
+  --ink:#111114;
+  --ink-2:#3a3f4c;
+  --ink-3:#4a505c;
+  --ink-dim:#6b6f7b;
+  --ink-strong:#000000;
+  /* lines */
+  --line:rgba(0,0,0,.09);
+  --line-2:rgba(0,0,0,.16);
+  --line-solid:#e3e3e8;
+  --line-strong:#d2d2d7;
+  /* accents */
+  --blue:#0071e3;      --blue-ink:#0057b8;    --blue-soft:#e9f3ff;
+  --green:#1f8f4e;     --green-ink:#0f6a36;   --green-soft:#e9f7ee;
+  --orange:#b65f00;    --orange-ink:#8a4800;  --orange-soft:#fff1df;
+  --purple:#6b47d6;    --purple-ink:#4d32a3;  --purple-soft:#f0edff;
+  --red:#bd2b28;       --red-ink:#a52320;     --red-soft:#fdeceb;
+  --on-accent:#ffffff;
+  /* inverted panel — the deliberately high-contrast block.
+     Dark in light mode; a LIFTED panel in dark mode so it never vanishes. */
+  --invert-bg:#141417;
+  --invert-ink:#f5f5f7;
+  --invert-ink-2:#c9ccd3;
+  --invert-line:#2a2a30;
+  /* code */
+  --code-bg:#141417;   --code-ink:#e6e8ee;    --code-line:#2a2a30;
+  --code-c:#7f8798; --code-k:#6fb2ff; --code-g:#63d193; --code-r:#ff7b72; --code-y:#ffc46b;
+  --code-light-bg:#f1f2f4; --code-light-ink:#1c1f26;
+  /* callouts */
+  --note-bg:rgba(0,113,227,.05);   --note-line:rgba(0,113,227,.20);
+  --warn-bg:#fff7e8;               --warn-line:#f2d6a7;  --warn-ink:#5c3b00;
+  /* chrome */
+  --strip-bg:#111114;  --strip-ink:#ffffff;
+  --strip-btn:rgba(255,255,255,.10); --strip-btn-hover:rgba(255,255,255,.20);
+  --strip-line:rgba(255,255,255,.20);
+  --pill-bg:rgba(255,255,255,.68);  --pill-ink:#252934;
+  --pill-on-bg:#111114;             --pill-on-ink:#ffffff;
+  --shadow:0 18px 60px rgba(0,0,0,.10);
+  --shadow-2:0 8px 28px rgba(0,0,0,.08);
+  --shadow-hover:0 16px 50px rgba(0,0,0,.11);
+  --orb-opacity:.72;
+  --gradtext:linear-gradient(102deg,#17191d 0%,#465365 48%,#0874dc 86%,#0068c9 100%);
+  --gradtext-fallback:#34475f;
+  /* type + geometry */
+  --serif:'Source Serif 4', ui-serif, Georgia, serif;
+  --sans:'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', Segoe UI, sans-serif;
+  --mono:'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  --radius:28px; --radius-2:18px;
+}
+
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0d0d10;
+  --bg-grad-1:rgba(23,42,71,.55);
+  --bg-grad-2:rgba(58,40,20,.45);
+  --bg-grad-3:#101015;
+  --bg-grad-4:#0a0a0d;
+  --surface:#17171c;
+  --surface-2:#1d1d23;
+  --surface-3:#22222a;
+  --glass:rgba(30,30,37,.72);
+  --glass-2:rgba(30,30,37,.60);
+  --glass-border:rgba(255,255,255,.10);
+  --nav-bg:rgba(16,16,20,.90);
+  --ink:#f2f2f5;
+  --ink-2:#c3c7d1;
+  --ink-3:#adb2bd;
+  --ink-dim:#9096a3;
+  --ink-strong:#ffffff;
+  --line:rgba(255,255,255,.12);
+  --line-2:rgba(255,255,255,.20);
+  --line-solid:#2b2b33;
+  --line-strong:#3a3a44;
+  --blue:#4da3ff;      --blue-ink:#8cc3ff;    --blue-soft:rgba(77,163,255,.16);
+  --green:#4bc47d;     --green-ink:#7fd9a2;   --green-soft:rgba(75,196,125,.16);
+  --orange:#f0a23c;    --orange-ink:#f5bd72;  --orange-soft:rgba(240,162,60,.16);
+  --purple:#a78bfa;    --purple-ink:#c4b1ff;  --purple-soft:rgba(167,139,250,.18);
+  --red:#f0736e;       --red-ink:#f79b97;     --red-soft:rgba(240,115,110,.16);
+  --on-accent:#0d0d10;
+  --invert-bg:#22222b;
+  --invert-ink:#f5f5f7;
+  --invert-ink-2:#c9ccd3;
+  --invert-line:#3d3d49;
+  --code-bg:#101014;   --code-ink:#e6e8ee;    --code-line:#2f2f3a;
+  --code-light-bg:#1b1b21; --code-light-ink:#dfe2e9;
+  --note-bg:rgba(77,163,255,.10);  --note-line:rgba(77,163,255,.30);
+  --warn-bg:rgba(240,162,60,.12);  --warn-line:rgba(240,162,60,.34); --warn-ink:#f3cd95;
+  --strip-bg:#000000;  --strip-ink:#f2f2f5;
+  --strip-btn:rgba(255,255,255,.10); --strip-btn-hover:rgba(255,255,255,.22);
+  --strip-line:rgba(255,255,255,.22);
+  --pill-bg:rgba(255,255,255,.07);  --pill-ink:#dcdfe7;
+  --pill-on-bg:#f2f2f5;             --pill-on-ink:#0d0d10;
+  --shadow:0 18px 60px rgba(0,0,0,.55);
+  --shadow-2:0 8px 28px rgba(0,0,0,.45);
+  --shadow-hover:0 16px 50px rgba(0,0,0,.60);
+  --orb-opacity:.30;
+  --gradtext:linear-gradient(102deg,#ffffff 0%,#cdd8e8 48%,#6fb2ff 86%,#4da3ff 100%);
+  --gradtext-fallback:#cfe0f5;
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+
+/* ============================ base ============================ */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 15% 0%, var(--bg-grad-1) 0, transparent 38%),
+    radial-gradient(circle at 80% 8%, var(--bg-grad-2) 0, transparent 32%),
+    linear-gradient(180deg, var(--bg-grad-3) 0, var(--bg) 45%, var(--bg-grad-4) 100%);
+  background-attachment:fixed;
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.45;
+  transition:background-color .2s ease, color .2s ease;
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1460px;margin:0 auto;padding:0 26px}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:6px}
+.vlabel{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mono{font-family:var(--mono)}
+
+/* ============================ topbar ============================ */
+.topbar{position:sticky;top:0;z-index:60}
+.contact-strip{background:var(--strip-bg);color:var(--strip-ink);border-bottom:1px solid var(--strip-line)}
+.contact-strip-inner{max-width:1460px;margin:0 auto;padding:8px 26px;display:flex;justify-content:flex-end;align-items:center;gap:8px}
+.contact-link{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;border:1px solid var(--strip-line);background:var(--strip-btn);color:var(--strip-ink);font-size:12px;font-weight:700;letter-spacing:-.01em;transition:background .16s,transform .16s}
+.contact-link:hover{background:var(--strip-btn-hover);transform:translateY(-1px)}
+.contact-link svg{width:14px;height:14px;fill:currentColor;flex:0 0 auto}
+.themetoggle{display:inline-flex;align-items:center;gap:7px;margin-left:6px;padding:7px 11px;border-radius:999px;border:1px solid var(--strip-line);background:var(--strip-btn);color:var(--strip-ink);font-family:var(--sans);font-size:12px;font-weight:700;cursor:pointer;transition:background .16s,transform .16s}
+.themetoggle:hover{background:var(--strip-btn-hover);transform:translateY(-1px)}
+.themetoggle svg{width:14px;height:14px;fill:currentColor;flex:0 0 auto}
+html[data-theme="light"] .themetoggle .i-moon{display:block}
+html[data-theme="light"] .themetoggle .i-sun{display:none}
+html[data-theme="dark"]  .themetoggle .i-moon{display:none}
+html[data-theme="dark"]  .themetoggle .i-sun{display:block}
+
+.nav{background:var(--nav-bg);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1460px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:13px 26px}
+.brand{font-weight:800;letter-spacing:-.03em;white-space:nowrap;color:var(--ink)}
+.brand span{font-family:var(--serif);font-weight:900}
+.brand .vtag{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink-dim);letter-spacing:.02em;margin-left:6px}
+.navlinks{display:flex;gap:6px;margin-left:auto;flex-wrap:nowrap;overflow-x:auto;min-width:0;padding-bottom:2px;scrollbar-width:thin}
+.navlinks a{flex:0 0 auto;white-space:nowrap;border:1px solid var(--line);background:var(--pill-bg);color:var(--pill-ink);padding:8px 12px;border-radius:999px;font-size:13px;cursor:pointer}
+.navlinks a.active{background:var(--pill-on-bg);color:var(--pill-on-ink);border-color:var(--pill-on-bg)}
+.menubtn{display:none;margin-left:auto;border:1px solid var(--line);background:var(--pill-bg);border-radius:12px;width:40px;height:36px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:4px}
+.menubtn i{display:block;width:16px;height:1.6px;background:var(--ink);border-radius:2px}
+.drawer{display:none;border-top:1px solid var(--line);background:var(--nav-bg);backdrop-filter:blur(18px);padding:12px 16px 16px}
+.drawer.open{display:block}
+.drawer a{display:block;padding:11px 4px;border-bottom:1px solid var(--line);font-size:15px;font-weight:600;color:var(--ink)}
+
+/* ============================ hero ============================ */
+.hero{min-height:78vh;display:flex;align-items:center;position:relative;isolation:isolate;overflow:hidden;padding:46px 0 26px}
+.orb{position:absolute;border-radius:50%;pointer-events:none;z-index:-1;opacity:var(--orb-opacity);filter:blur(22px)}
+.orb.a{width:540px;height:540px;background:radial-gradient(circle at 36% 34%,var(--blue) 0 14%,transparent 72%);right:-155px;top:-118px}
+.orb.b{width:370px;height:370px;background:radial-gradient(circle at 58% 44%,var(--orange) 0 14%,transparent 72%);left:-142px;bottom:54px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:16px}
+.eyebrow b{color:var(--ink-2)}
+.h1{font-family:var(--serif);font-size:clamp(48px,7vw,104px);line-height:.92;letter-spacing:-.06em;margin:0 0 24px;color:var(--ink)}
+.h1 em{font-style:normal;background:var(--gradtext);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--gradtext-fallback)}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){.h1 em{background:none;-webkit-text-fill-color:currentColor;color:var(--gradtext-fallback)}}
+.lede{font-size:clamp(18px,2.1vw,25px);line-height:1.34;color:var(--ink-2);max-width:840px;margin:0 0 26px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.cta{background:var(--pill-on-bg);color:var(--pill-on-ink);border:1px solid var(--pill-on-bg);border-radius:999px;padding:13px 17px;font-weight:700;display:inline-flex;gap:9px;align-items:center;font-size:14.5px;cursor:pointer;font-family:var(--sans)}
+.cta.secondary{background:var(--glass);color:var(--ink);border:1px solid var(--line-2)}
+
+/* ============================ sections ============================ */
+.section{padding:70px 0;scroll-margin-top:124px}
+.section h2{font-family:var(--serif);font-size:clamp(36px,4.4vw,64px);line-height:.96;letter-spacing:-.05em;margin:0 0 14px;color:var(--ink)}
+.section h3.sub-h{font-family:var(--serif);font-size:28px;letter-spacing:-.04em;margin:40px 0 8px;font-weight:700;color:var(--ink)}
+.section .sub{font-size:18.5px;color:var(--ink-3);max-width:940px;margin:0 0 28px;line-height:1.5}
+.section p{color:var(--ink-3)}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.rule{height:1px;background:var(--line);margin:0;border:0}
+
+/* ============================ components ============================ */
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.card{background:var(--glass);border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:var(--shadow-2);transition:transform .18s ease,box-shadow .18s ease;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+.card h3{margin:0 0 9px;font-size:19px;letter-spacing:-.035em;line-height:1.15;color:var(--ink)}
+.card p{margin:0;color:var(--ink-3);font-size:14px}
+.card ul{margin:10px 0 0;padding-left:17px;color:var(--ink-3);font-size:13.5px}
+.card li{margin:0 0 6px}
+
+.panel{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-2);padding:22px}
+.panel h3{margin:0 0 6px;font-size:21px;letter-spacing:-.035em;color:var(--ink)}
+.panel p,.panel li{color:var(--ink-3);font-size:14.5px}
+.panel ul,.panel ol{margin:12px 0 0;padding-left:18px}
+
+/* inverted panel: high-contrast in BOTH themes */
+.panel.invert,.plainbox{background:var(--invert-bg);border:1px solid var(--invert-line);color:var(--invert-ink);border-radius:24px;padding:26px 28px;box-shadow:var(--shadow)}
+.panel.invert h3,.plainbox h3{color:var(--invert-ink);font-family:var(--serif);font-size:24px;letter-spacing:-.035em;margin:0 0 10px}
+.panel.invert p,.panel.invert li,.plainbox p{color:var(--invert-ink-2);font-size:15.5px;line-height:1.6}
+
+.stat{padding:18px;background:var(--glass);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow-2)}
+.stat .n{font-family:var(--serif);font-size:40px;font-weight:900;letter-spacing:-.05em;line-height:.9;color:var(--ink)}
+.stat .t{font-size:12.5px;color:var(--ink-dim);margin-top:8px;line-height:1.4}
+
+.meta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+.tag{font-family:var(--mono);font-size:11px;color:var(--ink-2);background:var(--surface-3);border:1px solid var(--line);border-radius:999px;padding:5px 8px;display:inline-block}
+.tag.blue{background:var(--blue-soft);color:var(--blue-ink);border-color:var(--blue-soft)}
+.tag.green{background:var(--green-soft);color:var(--green-ink);border-color:var(--green-soft)}
+.tag.orange{background:var(--orange-soft);color:var(--orange-ink);border-color:var(--orange-soft)}
+.tag.purple{background:var(--purple-soft);color:var(--purple-ink);border-color:var(--purple-soft)}
+.tag.red{background:var(--red-soft);color:var(--red-ink);border-color:var(--red-soft)}
+
+.fieldnote{font-size:13.5px;line-height:1.6;color:var(--ink-3);background:var(--note-bg);border:1px solid var(--note-line);border-left:3px solid var(--blue);border-radius:14px;padding:14px 18px;margin:24px 0;max-width:90ch}
+.fieldnote b{color:var(--blue)}
+.warning{background:var(--warn-bg);border:1px solid var(--warn-line);border-left:3px solid var(--orange);border-radius:14px;padding:14px 18px;color:var(--warn-ink);margin:22px 0;font-size:13.5px;max-width:90ch}
+.warning b{color:var(--orange-ink)}
+
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:8px 14px;border-radius:100px;border:1px solid var(--line-strong);background:var(--pill-bg);color:var(--ink-3);cursor:pointer;transition:.15s}
+.chip:hover{border-color:var(--ink-dim);color:var(--ink)}
+.chip.active{background:var(--blue);border-color:var(--blue);color:var(--on-accent)}
+.chiprow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+
+.tablewrap{background:var(--glass);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow-2);overflow:hidden}
+.table-scroll{overflow:auto}
+table{border-collapse:collapse;width:100%}
+th{position:sticky;top:0;background:var(--surface);z-index:2;text-align:left;font-size:11px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-dim);padding:14px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{vertical-align:top;padding:14px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--ink-3)}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:700;color:var(--ink)}
+
+pre.term{font-family:var(--mono);font-size:12px;line-height:1.62;background:var(--code-bg);color:var(--code-ink);border:1px solid var(--code-line);border-radius:16px;padding:16px 18px;overflow:auto;margin:14px 0 0;white-space:pre}
+pre.term .c{color:var(--code-c)} pre.term .k{color:var(--code-k)}
+pre.term .g{color:var(--code-g)} pre.term .r{color:var(--code-r)} pre.term .y{color:var(--code-y)}
+pre.light{font-family:var(--mono);font-size:12px;line-height:1.6;background:var(--code-light-bg);color:var(--code-light-ink);border:1px solid var(--line);border-radius:14px;padding:14px 16px;overflow:auto;margin:12px 0 0;white-space:pre}
+
+/* accordion */
+.fam{background:var(--surface);border:1px solid var(--line-solid);border-radius:18px;overflow:hidden;margin-bottom:10px;transition:border-color .18s}
+.fam.open{border-color:var(--line-strong);box-shadow:var(--shadow-2)}
+.fam-head{display:grid;grid-template-columns:46px 1fr auto;gap:16px;align-items:center;padding:20px 22px;cursor:pointer;width:100%;text-align:left;background:none;border:none;color:var(--ink);font:inherit}
+.fam-dot{width:40px;height:40px;border-radius:9px;display:grid;place-items:center;font-family:var(--serif);font-size:19px;color:var(--on-accent);background:var(--blue);font-weight:700}
+.fam-title{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.fam-sub{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:3px}
+.fam-toggle{font-family:var(--mono);font-size:20px;color:var(--ink-dim);transition:transform .2s}
+.fam.open .fam-toggle{transform:rotate(45deg)}
+.fam-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease;border-top:1px solid transparent}
+.fam.open .fam-body{grid-template-rows:1fr;border-top-color:var(--line-solid)}
+.fam-body>div{overflow:hidden}
+.fam-inner{padding:18px 22px 22px;color:var(--ink-3);font-size:14.5px;line-height:1.6}
+
+/* ============================ music intelligence ============================ */
+.rights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
+.rights-grid .panel{min-height:190px}
+.rights-grid .panel:first-child{border-top:4px solid var(--orange)}
+.rights-grid .panel:last-child{border-top:4px solid var(--blue)}
+.big-label{font-family:var(--serif);font-size:34px;font-weight:900;letter-spacing:-.04em;color:var(--ink);display:block;margin:8px 0}
+.source{font-family:var(--mono);font-size:10.5px;color:var(--blue);display:inline-block;margin-top:10px}
+.source:hover{text-decoration:underline}
+.filterbar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.filterbar input,.field input,.field select{appearance:none;border:1px solid var(--line-2);background:var(--surface);color:var(--ink);border-radius:12px;padding:11px 12px;font:inherit;min-width:0;width:100%}
+.filterbar input{max-width:420px}
+.timeline{position:relative;margin-top:24px}
+.event{display:grid;grid-template-columns:92px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}
+.event-year{font-family:var(--serif);font-size:27px;font-weight:900;color:var(--orange);letter-spacing:-.04em}
+.event h3{margin:0 0 4px;color:var(--ink);font-size:18px}
+.event p{margin:0;font-size:14px}
+.calc-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
+.calc-panel{display:none}
+.calc-panel.active{display:block}
+.calc-box{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow-2)}
+.field-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.field{display:block}
+.field>span{display:block;font-size:11px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.04em;color:var(--ink-dim);margin:0 0 6px}
+.results{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.result{background:var(--surface-2);border:1px solid var(--line);border-radius:18px;padding:15px}
+.result .rlabel{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-dim)}
+.result output{display:block;font-family:var(--serif);font-size:28px;font-weight:900;color:var(--ink);letter-spacing:-.04em;margin-top:5px}
+.result small{display:block;color:var(--ink-dim);font-size:11px;margin-top:3px}
+.water{margin-top:18px;display:grid;gap:10px}
+.water-row{display:grid;grid-template-columns:minmax(180px,1fr) 3fr 100px;gap:12px;align-items:center;font-size:12px;color:var(--ink-3)}
+.water-track{height:9px;border-radius:999px;background:var(--surface-2);overflow:hidden}
+.water-track i{height:100%;display:block;background:var(--blue);border-radius:999px;min-width:2px}
+.water-row.deduct .water-track i{background:var(--orange)}
+.water-row.net .water-track i{background:var(--green)}
+.water-val{text-align:right;font-family:var(--mono);font-size:11px;color:var(--ink)}
+.venue-stack{display:grid;grid-template-columns:1fr 1.2fr;gap:18px}
+.layoutbox{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:20px;min-height:310px}
+.arena{width:min(420px,100%);aspect-ratio:1.7;margin:22px auto;position:relative;border:18px solid var(--surface-2);border-radius:48% 48% 42% 42%;box-shadow:inset 0 0 0 1px var(--line)}
+.stage{position:absolute;background:var(--invert-bg);color:var(--invert-ink);font-family:var(--mono);font-size:10px;display:grid;place-items:center;letter-spacing:.08em;text-transform:uppercase}
+.arena.end .stage{width:25%;height:72%;left:0;top:14%;border-radius:0 12px 12px 0}
+.arena.round .stage{width:28%;aspect-ratio:1;border-radius:50%;left:36%;top:25%}
+.arena.thrust .stage{width:48%;height:25%;left:0;top:37%;border-radius:0 12px 12px 0}
+.arena.ga .stage{width:22%;height:82%;right:0;top:9%;border-radius:12px 0 0 12px}
+.arena.theater .stage{width:100%;height:20%;left:0;top:0;border-radius:30px 30px 0 0}
+.arena.immersive .stage{width:72%;height:72%;left:14%;top:14%;border-radius:50%;background:var(--purple)}
+.mini{font-size:12px;color:var(--ink-dim)}
+.hide{display:none!important}
+
+@media(max-width:960px){
+  .rights-grid,.field-grid,.results,.venue-stack{grid-template-columns:1fr}
+  .event{grid-template-columns:68px 1fr}
+  .water-row{grid-template-columns:1fr 1.5fr 82px}
+}
+
+/* ============================ footer ============================ */
+.footer{padding:34px 0 60px;color:var(--ink-dim);font-size:13px;border-top:1px solid var(--line);margin-top:40px}
+.footer a{color:var(--blue)}
+.verstamp{font-family:var(--mono);font-size:11.5px;color:var(--ink-dim);line-height:1.6}
+
+@media(max-width:960px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .navlinks{display:none}
+  .menubtn{display:flex}
+  .contact-strip-inner{padding:7px 14px;justify-content:center;gap:6px}
+  .contact-link,.themetoggle{flex:1;justify-content:center;max-width:130px;padding:7px 8px;font-size:11px}
+  .hero{min-height:auto;padding:36px 0}
+  .section{padding:48px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== TOPBAR: contact + theme toggle ===================== -->
+<div class="topbar">
+  <div class="contact-strip">
+    <div class="contact-strip-inner">
+      <a class="contact-link" href="mailto:ponelson@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg>
+        <span>Email</span>
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/ponelson/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5H3.56V19h3.38V8.5ZM5.25 3A1.96 1.96 0 1 0 5.25 6.92 1.96 1.96 0 0 0 5.25 3ZM20.44 13.08c0-3.16-1.68-4.63-3.93-4.63-1.81 0-2.62.99-3.08 1.69V8.5h-3.38V19h3.38v-5.2c0-1.37.26-2.7 1.96-2.7 1.68 0 1.7 1.57 1.7 2.79V19h3.38l-.03-5.92Z"/></svg>
+        <span>LinkedIn</span>
+      </a>
+      <a class="contact-link" href="https://ponelson.github.io/pon/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.9 5.34.9 11.6c0 4.9 3.17 9.06 7.57 10.53.55.1.75-.24.75-.53v-1.86c-3.08.67-3.73-1.49-3.73-1.49-.5-1.29-1.23-1.63-1.23-1.63-1.01-.69.08-.67.08-.67 1.11.08 1.7 1.15 1.7 1.15.99 1.7 2.6 1.21 3.23.93.1-.72.39-1.21.7-1.49-2.46-.28-5.05-1.23-5.05-5.49 0-1.21.43-2.2 1.14-2.98-.11-.28-.5-1.41.11-2.94 0 0 .93-.3 3.05 1.14.88-.25 1.83-.37 2.77-.37.94 0 1.89.13 2.78.37 2.11-1.44 3.04-1.14 3.04-1.14.61 1.53.22 2.66.11 2.94.71.78 1.14 1.77 1.14 2.98 0 4.27-2.6 5.21-5.07 5.48.4.35.76 1.03.76 2.08v3.08c0 .3.2.64.76.53 4.39-1.47 7.56-5.63 7.56-10.53C23.1 5.34 18.27.5 12 .5Z"/></svg>
+        <span>GitHub</span>
+      </a>
+      <button class="themetoggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Toggle light or dark theme">
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10Zm0-13.5a1 1 0 0 1 1 1V6a1 1 0 1 1-2 0V4.5a1 1 0 0 1 1-1Zm0 15a1 1 0 0 1 1 1V21a1 1 0 1 1-2 0v-1.5a1 1 0 0 1 1-1ZM3.5 12a1 1 0 0 1 1-1H6a1 1 0 1 1 0 2H4.5a1 1 0 0 1-1-1Zm14.5 0a1 1 0 0 1 1-1h1.5a1 1 0 1 1 0 2H19a1 1 0 0 1-1-1ZM5.6 5.6a1 1 0 0 1 1.4 0l1.1 1.1a1 1 0 0 1-1.4 1.4L5.6 7a1 1 0 0 1 0-1.4Zm10.3 10.3a1 1 0 0 1 1.4 0l1.1 1.1a1 1 0 0 1-1.4 1.4l-1.1-1.1a1 1 0 0 1 0-1.4Zm2.5-10.3a1 1 0 0 1 0 1.4L17.3 8.1a1 1 0 1 1-1.4-1.4L17 5.6a1 1 0 0 1 1.4 0ZM8.1 15.9a1 1 0 0 1 0 1.4L7 18.4A1 1 0 0 1 5.6 17l1.1-1.1a1 1 0 0 1 1.4 0Z"/></svg>
+        <span id="themeLabel">Dark</span>
+      </button>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">Music <span>Intelligence</span><span class="vtag">v1.0</span></div>
+      <div class="navlinks" id="navlinks"></div>
+      <button class="menubtn" id="menubtn" type="button" aria-label="Menu"><i></i><i></i><i></i></button>
+    </div>
+    <div class="drawer" id="drawer"></div>
+  </nav>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="orb a"></div><div class="orb b"></div>
+  <div class="wrap">
+    <!-- HEADER VERSION STAMP — required -->
+    <div class="eyebrow">Music business reference &nbsp;/&nbsp; <b>v1.0</b> &nbsp;&middot;&nbsp; 11 October 2026, 6:32 PM ET &nbsp;&middot;&nbsp; <span class="mono">build 2026-10-11T18:32-04:00</span></div>
+    <h1 class="h1">One song. <em>Several economies.</em></h1>
+    <p class="lede">Follow the money from subscriber revenue to masters and compositions, from catalog cash flow to institutional capital, and from ticket face value to artist tour profit.</p>
+    <div class="hero-actions"><a class="cta" href="#calculators">Run the calculators</a><a class="cta secondary" href="#catalogs">Follow catalog capital</a></div>
+  </div>
+</header>
+
+<main>
+  <section class="section" id="architecture" data-nav="Architecture">
+    <div class="wrap">
+      <div class="kicker">Market architecture</div>
+      <h2>The storefront is not the royalty statement.</h2>
+      <p class="sub">A single listen can touch two copyrights, several licenses, multiple collection systems and a chain of contractual deductions.</p>
+      <div class="grid g4">
+        <div class="stat"><div class="n">$31.7B</div><div class="t">2025 global recorded-music trade revenue, according to IFPI’s 2026 report.</div></div>
+        <div class="stat"><div class="n">69.6%</div><div class="t">Streaming share of 2025 global recorded-music revenue, IFPI.</div></div>
+        <div class="stat"><div class="n">837M</div><div class="t">Paid subscription accounts globally at year-end 2025, IFPI.</div></div>
+        <div class="stat"><div class="n">460</div><div class="t">Venues under Live Nation’s broad control definition at year-end 2025.</div></div>
+      </div>
+      <div class="rights-grid">
+        <div class="panel"><div class="meta"><span class="tag orange">01 / Sound recording</span></div><span class="big-label">The master</span><p>The recorded performance. It may be owned or licensed by an artist, label, distributor, catalog buyer or financing vehicle. Interactive-service payments usually travel through negotiated master licenses.</p></div>
+        <div class="panel"><div class="meta"><span class="tag blue">02 / Musical work</span></div><span class="big-label">The composition</span><p>The song itself. Songwriters and publishers participate through performance and mechanical systems, with territory, society affiliation, ownership and administration affecting the route.</p></div>
+      </div>
+      <div class="panel invert" style="margin-top:18px"><h3>The rule behind every calculator</h3><p>There is no universal major-service “per-stream rate.” The tools below use visible, editable assumptions to estimate attributable revenue pools and contractual cash flows. Statements and contracts remain controlling.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="streaming" data-nav="Streaming">
+    <div class="wrap">
+      <div class="kicker">Services and routes</div>
+      <h2>Nine storefronts, different economics.</h2>
+      <p class="sub">Scale matters, but so do plan mix, territory, user behavior, licensing terms and the route through which each right is paid.</p>
+      <div class="tablewrap"><div class="table-scroll"><table>
+        <thead><tr><th>Service</th><th>Model</th><th>Master route</th><th>Composition route</th><th>Watch</th></tr></thead>
+        <tbody>
+          <tr><td>Spotify</td><td>Subscription + advertising</td><td>Direct label, distributor and licensor agreements</td><td>PROs, MLC and publisher direct licenses by territory</td><td>No fixed per-stream rate; streamshare allocation</td></tr>
+          <tr><td>Apple Music</td><td>Subscription-led</td><td>Direct licenses and distribution agreements</td><td>Performance and mechanical licensing</td><td>Territory and plan mix</td></tr>
+          <tr><td>YouTube</td><td>Ads + Music/Premium + UGC</td><td>Label licenses, Content ID and partner programs</td><td>Publisher licenses, societies and mechanical systems</td><td>UGC claims and video monetization</td></tr>
+          <tr><td>Amazon Music</td><td>Prime, Unlimited and ad-supported</td><td>Direct master licenses</td><td>Publisher, society and statutory routes</td><td>Bundled Prime economics</td></tr>
+          <tr><td>Tencent Music</td><td>Subscriptions, social entertainment and ads</td><td>Territory-specific label licensing</td><td>Local collecting and publisher arrangements</td><td>China platform and social mix</td></tr>
+          <tr><td>Deezer</td><td>Subscription + advertising</td><td>Direct licenses; artist-centric experiments</td><td>Society and publisher licensing</td><td>User-centric adjustments</td></tr>
+          <tr><td>TIDAL</td><td>Subscription-led</td><td>Direct label and distributor licenses</td><td>Performance and mechanical routes</td><td>High-value subscriber mix</td></tr>
+          <tr><td>SoundCloud</td><td>Subscriptions, ads and artist services</td><td>Fan-powered and licensed catalog systems</td><td>Publisher and society licensing</td><td>Direct-fan and UGC economics</td></tr>
+          <tr><td>Pandora</td><td>Radio + subscription</td><td>Direct interactive licenses; SoundExchange for eligible noninteractive use</td><td>PRO and mechanical routes</td><td>Interactive versus statutory use</td></tr>
+        </tbody>
+      </table></div></div>
+      <div class="fieldnote"><b>Current scale.</b> Spotify reported 300 million Premium subscribers and 777 million monthly active users for Q2 2026. YouTube said YouTube Music and Premium passed 125 million subscribers including trials in March 2025.</div>
+    </div>
+  </section>
+
+  <section class="section" id="control" data-nav="Control">
+    <div class="wrap">
+      <div class="kicker">Majors and capital</div>
+      <h2>Control sits across labels, publishers and capital.</h2>
+      <p class="sub">Recorded music and publishing are distinct. Catalog investors may buy copyrights, income streams, operating platforms, debt or minority interests—and sometimes more than one.</p>
+      <div class="grid g4">
+        <div class="card"><div class="meta"><span class="tag orange">Major</span></div><h3>Universal Music Group</h3><p>Scaled recorded-music and publishing operations, distribution, artist services and a growing role in catalog partnerships.</p></div>
+        <div class="card"><div class="meta"><span class="tag blue">Major</span></div><h3>Sony Music Group</h3><p>Sony Music Entertainment and Sony Music Publishing span masters, compositions, distribution and major catalog acquisitions.</p></div>
+        <div class="card"><div class="meta"><span class="tag purple">Major</span></div><h3>Warner Music Group</h3><p>Warner Recorded Music and Warner Chappell combine global repertoire, administration, distribution and catalog management.</p></div>
+        <div class="card"><div class="meta"><span class="tag green">Scaled independent</span></div><h3>BMG + Concord</h3><p>The combination completed in September 2026, with Bertelsmann at 67% and Great Mountain Partners at 33%.</p></div>
+      </div>
+      <h3 class="sub-h">Institutional catalog platforms</h3>
+      <div class="tablewrap"><div class="table-scroll"><table>
+        <thead><tr><th>Platform</th><th>Capital relationship</th><th>Examples / strategy</th></tr></thead>
+        <tbody>
+          <tr><td>Recognition Music Group</td><td>Blackstone ownership; formerly Hipgnosis</td><td>Large song portfolio, operating platform and music ABS financing</td></tr>
+          <tr><td>Primary Wave</td><td>Brookfield strategic partnership</td><td>Publishing interests plus brand, estate and marketing services</td></tr>
+          <tr><td>Chord Music Partners</td><td>Dundee Partners with UMG minority interest</td><td>Portfolio of songs and recordings with UMG distribution and publishing administration</td></tr>
+          <tr><td>HarbourView</td><td>Institutional capital platform</td><td>Fleetwood Mac interests, Nelly, Luis Fonsi and producer royalties</td></tr>
+          <tr><td>Shamrock Capital</td><td>Private investment manager</td><td>Media, entertainment and music-rights investments</td></tr>
+          <tr><td>Litmus Music</td><td>Carlyle-backed</td><td>Rights acquisitions including Katy Perry catalog interests</td></tr>
+          <tr><td>Pophouse</td><td>Entertainment and IP platform</td><td>Acquired KISS music catalog, brand name and IP in 2024</td></tr>
+          <tr><td>Influence Media</td><td>BlackRock Alternative Investors and Warner Music relationship</td><td>Modern catalog and songwriter investment platform</td></tr>
+        </tbody>
+      </table></div></div>
+      <div class="warning"><b>Ownership warning.</b> “Bought the catalog” may mean publishing copyrights, writer income, masters, artist royalties, neighboring rights, name-image-likeness rights or only a participation. The asset perimeter matters more than the headline.</div>
+    </div>
+  </section>
+
+  <section class="section" id="catalogs" data-nav="Catalogs">
+    <div class="wrap">
+      <div class="kicker">1997 to today</div>
+      <h2>From royalty bonds to permanent capital.</h2>
+      <p class="sub">Bowie kept ownership and borrowed against future royalties. The next cycle added outright copyright purchases, platform take-privates, private credit, ABS and operating-company consolidation.</p>
+      <div class="filterbar"><input id="catalogSearch" type="search" placeholder="Search artist, buyer or structure" aria-label="Search catalog timeline"><button class="chip active" type="button" data-cat="all">All</button><button class="chip" type="button" data-cat="securitization">Securitization</button><button class="chip" type="button" data-cat="artist">Artist deal</button><button class="chip" type="button" data-cat="platform">Platform</button></div>
+      <div class="timeline" id="catalogTimeline">
+        <article class="event" data-type="securitization" data-search="bowie bonds prudential securitization"><div class="event-year">1997</div><div><h3>Bowie Bonds</h3><p>$55 million, 10-year securities at 7.9%, backed by royalties from 25 pre-1990 David Bowie albums.</p></div></article>
+        <article class="event" data-type="platform" data-search="hipgnosis songs fund london mercuriadis"><div class="event-year">2018</div><div><h3>Hipgnosis Songs Fund launches</h3><p>A London-listed vehicle made song catalogs legible as an institutional income asset.</p></div></article>
+        <article class="event" data-type="artist" data-search="bob dylan universal music publishing"><div class="event-year">2020</div><div><h3>Bob Dylan / UMPG</h3><p>Universal Music Publishing Group acquired Dylan’s entire songwriting catalog.</p></div></article>
+        <article class="event" data-type="artist" data-search="stevie nicks primary wave"><div class="event-year">2020</div><div><h3>Stevie Nicks / Primary Wave</h3><p>A majority stake in publishing copyrights and related interests joined Primary Wave’s active-management platform.</p></div></article>
+        <article class="event" data-type="platform" data-search="blackstone hipgnosis partnership one billion"><div class="event-year">2021</div><div><h3>Blackstone + Hipgnosis</h3><p>The parties announced a $1 billion partnership for songs, recordings, music IP and royalties.</p></div></article>
+        <article class="event" data-type="artist" data-search="bruce springsteen sony music publishing masters"><div class="event-year">2021</div><div><h3>Bruce Springsteen / Sony</h3><p>Sony acquired both the recorded-music and songwriting catalogs in a landmark whole-of-rights transaction.</p></div></article>
+        <article class="event" data-type="artist" data-search="sting universal music publishing"><div class="event-year">2022</div><div><h3>Sting / UMPG</h3><p>UMPG acquired Sting’s songwriting catalog across solo work and The Police repertoire.</p></div></article>
+        <article class="event" data-type="artist" data-search="genesis phil collins concord tony banks mike rutherford"><div class="event-year">2022</div><div><h3>Genesis interests / Concord</h3><p>Concord acquired musical works and recordings interests associated with Tony Banks, Phil Collins and Mike Rutherford.</p></div></article>
+        <article class="event" data-type="artist" data-search="justin bieber hipgnosis songs capital"><div class="event-year">2023</div><div><h3>Justin Bieber / Hipgnosis</h3><p>Publishing, artist royalties and neighboring-rights interests through 2021 reportedly sold for about $200 million.</p></div></article>
+        <article class="event" data-type="artist" data-search="katy perry litmus carlyle"><div class="event-year">2023</div><div><h3>Katy Perry / Litmus</h3><p>Litmus acquired catalog interests covering Perry’s releases from 2008 through 2020.</p></div></article>
+        <article class="event" data-type="securitization" data-search="concord music abs 1.8 billion"><div class="event-year">2023</div><div><h3>Concord prices $1.8B ABS</h3><p>A large music-rights securitization financed corporate growth and demonstrated catalog-credit scale.</p></div></article>
+        <article class="event" data-type="artist" data-search="michael jackson sony half catalog"><div class="event-year">2024</div><div><h3>Michael Jackson estate / Sony</h3><p>Sony reportedly acquired half of Jackson’s publishing and recorded-music interests for at least $600 million.</p></div></article>
+        <article class="event" data-type="artist" data-search="kiss pophouse catalog brand ip"><div class="event-year">2024</div><div><h3>KISS / Pophouse</h3><p>Pophouse acquired the music catalog, brand name and intellectual property of KISS.</p></div></article>
+        <article class="event" data-type="artist" data-search="queen sony 1.27 billion"><div class="event-year">2024</div><div><h3>Queen / Sony</h3><p>A reported $1.27 billion transaction became the largest widely reported artist-catalog deal.</p></div></article>
+        <article class="event" data-type="platform" data-search="blackstone hipgnosis take private recognition music"><div class="event-year">2024</div><div><h3>Hipgnosis taken private</h3><p>Blackstone completed the acquisition of Hipgnosis Songs Fund and later consolidated branding under Recognition Music Group.</p></div></article>
+        <article class="event" data-type="platform" data-search="legends asm global venue acquisition"><div class="event-year">2024</div><div><h3>Legends acquires ASM Global</h3><p>Venue management, premium experiences and commercial services consolidated into a broader live-events platform.</p></div></article>
+        <article class="event" data-type="artist" data-search="taylor swift shamrock masters repurchase"><div class="event-year">2025</div><div><h3>Taylor Swift repurchases masters</h3><p>Swift acquired the masters to her first six albums from Shamrock Capital.</p></div></article>
+        <article class="event" data-type="securitization" data-search="blackstone hipgnosis music abs"><div class="event-year">2025</div><div><h3>Music ABS expands</h3><p>Blackstone led a landmark securitization backed by the Hipgnosis portfolio, extending the debt-market model.</p></div></article>
+        <article class="event" data-type="platform" data-search="bmg concord bertelsmann great mountain apollo"><div class="event-year">2026</div><div><h3>BMG and Concord combine</h3><p>The combination completed in September; Apollo announced a $1.25 billion capital solution supporting the transaction and portfolio.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="calculators" data-nav="Calculators">
+    <div class="wrap">
+      <div class="kicker">Editable planning tools</div>
+      <h2>Model the contract, not the headline.</h2>
+      <p class="sub">Every assumption is exposed. Change the inputs, compare the cash routes and read the caveats beside the output.</p>
+      <div class="calc-tabs" role="tablist">
+        <button class="chip active" type="button" data-calc="publishing">Publishing</button><button class="chip" type="button" data-calc="performance">Performance</button><button class="chip" type="button" data-calc="podcast">Podcast</button><button class="chip" type="button" data-calc="touring">Touring</button><button class="chip" type="button" data-calc="catalog">Catalog value</button>
+      </div>
+
+      <div class="calc-panel active" id="calc-publishing"><div class="calc-box">
+        <h3>Publishing royalties / interactive streaming</h3><p>Estimates an attributable composition pool, then separates performance and mechanical income. The 15.30% default is the 2026 U.S. Phonorecords IV headline revenue rate; the real statutory formula also tests TCC and subscriber minimums.</p>
+        <div class="field-grid"><label class="field"><span>Monthly streams</span><input id="pStreams" type="number" min="0" value="5000000"></label><label class="field"><span>Service revenue proxy / stream</span><input id="pProxy" type="number" min="0" step="0.0001" value="0.008"></label><label class="field"><span>All-in composition rate %</span><input id="pRate" type="number" min="0" max="100" step="0.05" value="15.3"></label><label class="field"><span>Performance mix %</span><input id="pPerf" type="number" min="0" max="100" value="45"></label><label class="field"><span>Your composition ownership %</span><input id="pOwn" type="number" min="0" max="100" value="100"></label><label class="field"><span>Publishing admin fee %</span><input id="pAdmin" type="number" min="0" max="100" value="15"></label></div>
+        <div class="results"><div class="result"><div class="rlabel">Attributable service revenue</div><output id="pRevenue">—</output><small>streams × editable proxy</small></div><div class="result"><div class="rlabel">All-in composition pool</div><output id="pPool">—</output><small>before rights split</small></div><div class="result"><div class="rlabel">Net controlled cash</div><output id="pNet">—</output><small>writer direct + publisher net</small></div></div>
+        <div class="fieldnote"><b>Workbook correction.</b> The supplied publishing workbook’s deal architecture informed ownership, administration, subpublishing and recoupment concepts. Its 40% performance-administration term is not used as a market default.</div>
+      </div></div>
+
+      <div class="calc-panel" id="calc-performance"><div class="calc-box">
+        <h3>Performance royalties</h3><p>Composition public-performance income and U.S. statutory digital-performance income for sound recordings are separate rights.</p>
+        <div class="field-grid"><label class="field"><span>Gross PRO royalties</span><input id="rPro" type="number" min="0" value="25000"></label><label class="field"><span>Composition ownership %</span><input id="rOwn" type="number" min="0" max="100" value="100"></label><label class="field"><span>Publisher admin fee %</span><input id="rAdmin" type="number" min="0" max="100" value="15"></label><label class="field"><span>Subpublisher deduction %</span><input id="rSub" type="number" min="0" max="100" value="0"></label><label class="field"><span>SoundExchange gross</span><input id="rSX" type="number" min="0" value="25000"></label><label class="field"><span>Featured-artist participation %</span><input id="rArtist" type="number" min="0" max="100" value="100"></label></div>
+        <div class="results"><div class="result"><div class="rlabel">Writer share paid direct</div><output id="rWriter">—</output></div><div class="result"><div class="rlabel">Publisher share net</div><output id="rPublisher">—</output></div><div class="result"><div class="rlabel">Featured artist direct</div><output id="rFeatured">—</output><small>45% statutory bucket</small></div><div class="result"><div class="rlabel">Rights owner</div><output id="rOwner">—</output><small>50% statutory bucket</small></div><div class="result"><div class="rlabel">Nonfeatured funds</div><output id="rNonfeatured">—</output><small>5% statutory bucket</small></div></div>
+        <div class="warning"><b>Do not combine blindly.</b> Interactive-streaming master royalties generally flow by direct license. SoundExchange primarily covers U.S. noninteractive digital uses such as webcasting and satellite radio.</div>
+      </div></div>
+
+      <div class="calc-panel" id="calc-podcast"><div class="calc-box">
+        <h3>Podcast contribution</h3><p>Builds monthly revenue from sold ad impressions, paid subscribers and video, then deducts production and talent costs.</p>
+        <div class="field-grid"><label class="field"><span>Episodes / month</span><input id="oEpisodes" type="number" min="1" value="4"></label><label class="field"><span>Downloads / episode</span><input id="oDownloads" type="number" min="0" value="50000"></label><label class="field"><span>Ad slots / episode</span><input id="oSlots" type="number" min="0" value="2"></label><label class="field"><span>Blended sold CPM</span><input id="oCpm" type="number" min="0" value="25"></label><label class="field"><span>Fill rate %</span><input id="oFill" type="number" min="0" max="100" value="75"></label><label class="field"><span>Network / sales fee %</span><input id="oFee" type="number" min="0" max="100" value="30"></label><label class="field"><span>Paid subscribers</span><input id="oSubs" type="number" min="0" value="500"></label><label class="field"><span>Subscription price</span><input id="oSubPrice" type="number" min="0" step="0.5" value="5"></label><label class="field"><span>Subscription fee %</span><input id="oSubFee" type="number" min="0" max="100" value="15"></label><label class="field"><span>Monthly video views</span><input id="oViews" type="number" min="0" value="100000"></label><label class="field"><span>Video RPM</span><input id="oRpm" type="number" min="0" step="0.5" value="4"></label><label class="field"><span>Production + talent cost</span><input id="oCosts" type="number" min="0" value="17000"></label></div>
+        <div class="results"><div class="result"><div class="rlabel">Gross ad billings</div><output id="oGross">—</output></div><div class="result"><div class="rlabel">Net advertising</div><output id="oNetAds">—</output></div><div class="result"><div class="rlabel">Monthly contribution</div><output id="oContribution">—</output></div><div class="result"><div class="rlabel">Annualized contribution</div><output id="oAnnual">—</output></div><div class="result"><div class="rlabel">Break-even downloads / episode</div><output id="oBreakEven">—</output></div></div>
+        <div class="fieldnote"><b>Inventory warning.</b> Downloads are not automatically monetized impressions. Slots must be sold, delivered, measured and eligible; host-read production, agency fees, makegoods and dynamic insertion change realized CPM.</div>
+      </div></div>
+
+      <div class="calc-panel" id="calc-touring"><div class="calc-box">
+        <h3>Touring economics</h3><p>Models a guarantee versus a percentage of the deal base, then adds merchandise, VIP and sponsorship before commissions and production.</p>
+        <div class="field-grid"><label class="field"><span>Shows</span><input id="tShows" type="number" min="1" value="20"></label><label class="field"><span>Sellable capacity</span><input id="tCap" type="number" min="0" value="5000"></label><label class="field"><span>Sell-through %</span><input id="tSell" type="number" min="0" max="100" value="85"></label><label class="field"><span>Face-value ticket</span><input id="tTicket" type="number" min="0" value="65"></label><label class="field"><span>Taxes + facility deductions %</span><input id="tTax" type="number" min="0" max="100" value="11"></label><label class="field"><span>Promoter expense / show</span><input id="tPromoter" type="number" min="0" value="100000"></label><label class="field"><span>Artist deal-base share %</span><input id="tShare" type="number" min="0" max="100" value="85"></label><label class="field"><span>Guarantee / show</span><input id="tGuarantee" type="number" min="0" value="250000"></label><label class="field"><span>Production + travel / show</span><input id="tProduction" type="number" min="0" value="120000"></label><label class="field"><span>Merch gross / head</span><input id="tMerch" type="number" min="0" value="8"></label><label class="field"><span>Venue merch cut %</span><input id="tMerchCut" type="number" min="0" max="100" value="20"></label><label class="field"><span>VIP net / show</span><input id="tVip" type="number" min="0" value="15000"></label><label class="field"><span>Tour sponsorship</span><input id="tSponsor" type="number" min="0" value="250000"></label><label class="field"><span>Team commissions %</span><input id="tCommission" type="number" min="0" max="100" value="25"></label></div>
+        <div class="results"><div class="result"><div class="rlabel">Attendance</div><output id="tAttendance">—</output></div><div class="result"><div class="rlabel">Face-value gross</div><output id="tGross">—</output></div><div class="result"><div class="rlabel">Artist settlement</div><output id="tSettlement">—</output></div><div class="result"><div class="rlabel">Promoter result</div><output id="tPromoterResult">—</output></div><div class="result"><div class="rlabel">Artist gross receipts</div><output id="tArtistGross">—</output></div><div class="result"><div class="rlabel">Artist tour profit</div><output id="tArtistNet">—</output></div></div>
+        <div class="warning"><b>Settlement definition matters.</b> Real contracts define adjusted gross, expenses, premium inventory, VIP, sponsorship, merchandise, support acts and production responsibility differently.</div>
+      </div></div>
+
+      <div class="calc-panel" id="calc-catalog"><div class="calc-box">
+        <h3>Catalog value and debt capacity</h3><p>Triangulates a discounted cash flow and an LTM cash-flow multiple, then tests a simplified debt structure and Bowie-style amortizing coverage.</p>
+        <div class="field-grid"><label class="field"><span>LTM net cash flow</span><input id="cCash" type="number" min="0" value="1000000"></label><label class="field"><span>Annual growth %</span><input id="cGrowth" type="number" min="-20" max="30" step="0.5" value="3"></label><label class="field"><span>Discount rate %</span><input id="cDiscount" type="number" min="0" max="50" step="0.5" value="10"></label><label class="field"><span>Terminal growth %</span><input id="cTerminal" type="number" min="-10" max="10" step="0.5" value="1"></label><label class="field"><span>Forecast years</span><input id="cYears" type="number" min="1" max="30" value="10"></label><label class="field"><span>Market multiple</span><input id="cMultiple" type="number" min="0" max="50" step="0.5" value="15"></label><label class="field"><span>Debt share %</span><input id="cDebtShare" type="number" min="0" max="100" value="50"></label><label class="field"><span>Debt rate %</span><input id="cDebtRate" type="number" min="0" max="30" step="0.5" value="8"></label><label class="field"><span>Bond principal</span><input id="cPrincipal" type="number" min="0" value="55000000"></label><label class="field"><span>Annual bond cash flow</span><input id="cBondCash" type="number" min="0" value="8500000"></label><label class="field"><span>Coupon / yield %</span><input id="cCoupon" type="number" min="0" max="30" step="0.1" value="7.9"></label><label class="field"><span>Amortization term</span><input id="cTerm" type="number" min="1" max="30" value="10"></label></div>
+        <div class="results"><div class="result"><div class="rlabel">DCF value</div><output id="cDcf">—</output></div><div class="result"><div class="rlabel">Multiple value</div><output id="cMultValue">—</output></div><div class="result"><div class="rlabel">Indicated midpoint</div><output id="cMid">—</output></div><div class="result"><div class="rlabel">Interest-only DSCR</div><output id="cDscr">—</output></div><div class="result"><div class="rlabel">Level debt service</div><output id="cDebtService">—</output></div><div class="result"><div class="rlabel">Bond coverage</div><output id="cBondDscr">—</output></div></div>
+        <div class="warning"><b>Diligence warning.</b> Normalize cash flow and test chain of title, term and reversion, territory and source concentration, audit exposure, collection lag, tax and litigation before relying on any value.</div>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="section" id="waterfalls" data-nav="Waterfalls">
+    <div class="wrap">
+      <div class="kicker">Illustrative cash routing</div>
+      <h2>Gross money is not participant cash.</h2>
+      <p class="sub">Use a common starting amount to compare recording, publishing and live-event waterfalls. These are teaching examples, not universal deal terms.</p>
+      <div class="calc-box"><label class="field"><span>Common gross starting amount</span><input id="wGross" type="number" min="0" value="1000"></label><div class="grid g3" style="margin-top:18px">
+        <div class="card"><h3>Interactive recording</h3><div class="water" id="wRecording"></div></div>
+        <div class="card"><h3>Interactive publishing</h3><div class="water" id="wPublishing"></div></div>
+        <div class="card"><h3>Live settlement</h3><div class="water" id="wLive"></div></div>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="section" id="venues" data-nav="Venues">
+    <div class="wrap">
+      <div class="kicker">Ownership, operation and geometry</div>
+      <h2>The building owner may not run the show.</h2>
+      <p class="sub">Public authorities, universities and teams often own the real estate. Private operators manage the venue; promoters book shows; ticketing and hospitality may sit with still other companies.</p>
+      <div class="tablewrap"><div class="table-scroll"><table>
+        <thead><tr><th>Operator / platform</th><th>Scale or portfolio</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td>Live Nation</td><td>460 venues under its 2025 broad control definition</td><td>Owned, leased, operated and equity-interest venues across clubs, theaters, amphitheaters, arenas and stadiums</td></tr>
+          <tr><td>AEG Presents / AEG</td><td>Major venue owner-operator and promoter</td><td>Crypto.com Arena, The O2, Mercedes-Benz Arena, clubs and theaters</td></tr>
+          <tr><td>Legends Global / ASM Global</td><td>Large third-party venue management and commercial-services platform</td><td>Arenas, stadiums, convention centers and theaters worldwide</td></tr>
+          <tr><td>Oak View Group</td><td>Arena development, operations and hospitality</td><td>Climate Pledge Arena, UBS Arena and Moody Center relationships</td></tr>
+          <tr><td>Madison Square Garden Entertainment</td><td>Owned iconic venue portfolio</td><td>Madison Square Garden, Radio City Music Hall, Beacon Theatre and The Chicago Theatre</td></tr>
+          <tr><td>Sphere Entertainment</td><td>Immersive destination venue</td><td>Sphere in Las Vegas</td></tr>
+        </tbody>
+      </table></div></div>
+      <div class="venue-stack" style="margin-top:22px">
+        <div class="layoutbox"><h3>Concert layout</h3><div class="chiprow" id="layoutChips"><button class="chip active" type="button" data-layout="end">End-stage</button><button class="chip" type="button" data-layout="round">In-round</button><button class="chip" type="button" data-layout="thrust">Thrust</button><button class="chip" type="button" data-layout="ga">Festival / GA</button><button class="chip" type="button" data-layout="theater">Theater</button><button class="chip" type="button" data-layout="immersive">Immersive</button></div><div class="arena end" id="arena"><div class="stage">Stage</div></div></div>
+        <div class="panel"><h3 id="layoutTitle">End-stage</h3><p id="layoutText">Most floor and bowl seats face one end. It maximizes production control but kills or discounts seats behind the stage.</p><div class="fieldnote"><b>Sellable capacity is not fire-code capacity.</b> Stage footprint, sightlines, production kills, premium inventory, ADA holds and local rules determine the seats available for a specific show.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="method" data-nav="Method">
+    <div class="wrap">
+      <div class="kicker">Method and sources</div>
+      <h2>Models, not royalty statements.</h2>
+      <p class="sub">Use the tools to frame questions, compare assumptions and spot where contract language changes the answer.</p>
+      <div class="fam"><button class="fam-head" type="button" aria-expanded="false"><div class="fam-dot">1</div><div><div class="fam-title">Streaming and publishing</div><div class="fam-sub">Pool allocation and statutory mechanics</div></div><div class="fam-toggle">+</div></button><div class="fam-body"><div><div class="fam-inner">Spotify explains that it pays rights holders by streamshare rather than a universal fixed rate. U.S. interactive mechanicals use the Phonorecords IV formula administered through the relevant licensing and collection systems. <a class="source" href="https://artists.spotify.com/en/royalties-guide" target="_blank" rel="noopener noreferrer">Spotify royalties guide ↗</a> &nbsp; <a class="source" href="https://www.crb.gov/announcements/" target="_blank" rel="noopener noreferrer">Copyright Royalty Board ↗</a> &nbsp; <a class="source" href="https://help.themlc.com/en/support/what-is-the-royalty-rate-used-to-calculate-my-royalties" target="_blank" rel="noopener noreferrer">The MLC formula ↗</a></div></div></div></div>
+      <div class="fam"><button class="fam-head" type="button" aria-expanded="false"><div class="fam-dot">2</div><div><div class="fam-title">Performance rights</div><div class="fam-sub">Composition and sound recording</div></div><div class="fam-toggle">+</div></button><div class="fam-body"><div><div class="fam-inner">The composition and master must remain separate. SoundExchange’s statutory allocation is 45% to featured recording artists, 50% to sound-recording copyright owners and 5% to nonfeatured artist funds. <a class="source" href="https://www.soundexchange.com/digital-performance-royalties/" target="_blank" rel="noopener noreferrer">SoundExchange ↗</a></div></div></div></div>
+      <div class="fam"><button class="fam-head" type="button" aria-expanded="false"><div class="fam-dot">3</div><div><div class="fam-title">Market data</div><div class="fam-sub">Recorded music, platforms and live</div></div><div class="fam-toggle">+</div></button><div class="fam-body"><div><div class="fam-inner"><a class="source" href="https://www.ifpi.org/global-music-report-2026-global-recorded-music-revenues-grow-6-4-as-record-companies-drive-innovation/" target="_blank" rel="noopener noreferrer">IFPI Global Music Report 2026 ↗</a> &nbsp; <a class="source" href="https://newsroom.spotify.com/2026-08-04/spotify-q2-2026-earnings/" target="_blank" rel="noopener noreferrer">Spotify Q2 2026 ↗</a> &nbsp; <a class="source" href="https://investors.livenationentertainment.com/sec-filings/all-sec-filings/content/0001335258-26-000009/lyv-20251231.htm" target="_blank" rel="noopener noreferrer">Live Nation 2025 Form 10-K ↗</a></div></div></div></div>
+      <div class="fam"><button class="fam-head" type="button" aria-expanded="false"><div class="fam-dot">4</div><div><div class="fam-title">Catalog chronology</div><div class="fam-sub">Primary company and institutional sources</div></div><div class="fam-toggle">+</div></button><div class="fam-body"><div><div class="fam-inner"><a class="source" href="https://www.wipo.int/pressroom/en/stories/bowie_ip_innovator.html" target="_blank" rel="noopener noreferrer">WIPO on Bowie Bonds ↗</a> &nbsp; <a class="source" href="https://www.universalmusic.com/universal-music-publishing-group-acquires-bob-dylans-entire-catalog-of-songs/" target="_blank" rel="noopener noreferrer">Bob Dylan / UMPG ↗</a> &nbsp; <a class="source" href="https://www.sonymusic.com/sonymusic/smg-announces-acquisition-of-bruce-springsteens-music/" target="_blank" rel="noopener noreferrer">Springsteen / Sony ↗</a> &nbsp; <a class="source" href="https://www.blackstone.com/news/press/blackstone-leads-landmark-music-abs-transaction-hipgnosis/" target="_blank" rel="noopener noreferrer">Blackstone music ABS ↗</a> &nbsp; <a class="source" href="https://concord.com/news/concord-prices-1-8-billion-abs-to-finance-corporate-growth-strategy/" target="_blank" rel="noopener noreferrer">Concord ABS ↗</a></div></div></div></div>
+      <div class="fieldnote"><b>File basis.</b> The royalty framework uses the available Ampersand publishing workbook as a structural reference, while correcting its broken reference and treating its administration fee as contract-specific. The podcast model uses transparent operating assumptions because the supplied podcast workbook was unavailable during the final build.</div>
+    </div>
+  </section>
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="wrap">
+    <p>Planning models and sourced market maps. Contract language, territory, ownership, collection policy and accounting statements control actual results.</p>
+    <p class="verstamp">Music Intelligence &mdash; v1.0 &middot; build 2026-10-11T18:32-04:00</p>
+    <p style="margin-top:8px">Contact: <a href="mailto:ponelson@gmail.com">ponelson@gmail.com</a> &middot; <a href="https://www.linkedin.com/in/ponelson/">LinkedIn</a> &middot; <a href="https://ponelson.github.io/pon/">GitHub</a></p>
+  </div>
+</footer>
+
+<script>
+/* ---------------- theme ---------------- */
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeToggle'),
+      lbl=document.getElementById('themeLabel'), meta=document.getElementById('themeColorMeta');
+  function read(){ try{return localStorage.getItem('theme');}catch(e){return null;} }
+  function write(v){ try{localStorage.setItem('theme',v);}catch(e){} }
+  function apply(t){
+    root.setAttribute('data-theme',t);
+    if(lbl) lbl.textContent = (t==='dark'?'Light':'Dark');
+    if(btn) btn.setAttribute('aria-pressed', t==='dark' ? 'true':'false');
+    if(meta) meta.setAttribute('content', t==='dark' ? '#0d0d10' : '#f5f5f7');
+  }
+  var saved=read();
+  var prefersDark=false, media=null;
+  try{media=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):null;prefersDark=!!(media&&media.matches);}catch(e){}
+  var initial = saved || (prefersDark ? 'dark':'light');
+  apply(initial);
+  if(btn) btn.addEventListener('click',function(){
+    var next = root.getAttribute('data-theme')==='dark' ? 'light':'dark';
+    apply(next); write(next);
+  });
+  try{if(media&&media.addEventListener)media.addEventListener('change',function(e){if(!read())apply(e.matches?'dark':'light');});}catch(e){}
+})();
+
+/* ---------------- nav from sections ---------------- */
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('section.section[data-nav]'));
+  var nl=document.getElementById('navlinks'), dr=document.getElementById('drawer'), mb=document.getElementById('menubtn');
+  secs.forEach(function(s){
+    [[nl],[dr]].forEach(function(h){
+      if(!h[0])return;
+      var a=document.createElement('a');
+      a.href='#'+s.id; a.textContent=s.dataset.nav;
+      h[0].appendChild(a);
+    });
+  });
+  if(mb&&dr) mb.addEventListener('click',function(){dr.classList.toggle('open');});
+  if(dr) dr.addEventListener('click',function(e){if(e.target.tagName==='A')dr.classList.remove('open');});
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting)return;
+      [].forEach.call(document.querySelectorAll('#navlinks a'),function(a){
+        a.classList.toggle('active', a.getAttribute('href')==='#'+e.target.id);
+      });
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  secs.forEach(function(s){io.observe(s);});
+})();
+
+/* ---------------- accordions ---------------- */
+[].forEach.call(document.querySelectorAll('.fam-head'),function(h){
+  h.addEventListener('click',function(){
+    var fam=h.closest('.fam');
+    if(!fam)return;
+    var open=fam.classList.toggle('open');
+    h.setAttribute('aria-expanded',open?'true':'false');
+  });
+});
+
+/* ---------------- utilities ---------------- */
+function n(id){var el=document.getElementById(id);var v=el?Number(el.value):0;return Number.isFinite(v)?v:0;}
+function put(id,value){var el=document.getElementById(id);if(el)el.textContent=value;}
+function money(v,d){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:d||0,minimumFractionDigits:d||0}).format(Number.isFinite(v)?v:0);}
+function compact(v){return new Intl.NumberFormat('en-US',{notation:'compact',maximumFractionDigits:1}).format(Number.isFinite(v)?v:0);}
+function bindInputs(root,fn){var el=document.getElementById(root);if(!el)return;[].forEach.call(el.querySelectorAll('input'),function(input){input.addEventListener('input',fn);});fn();}
+
+/* ---------------- calculator tabs ---------------- */
+[].forEach.call(document.querySelectorAll('[data-calc]'),function(btn){
+  btn.addEventListener('click',function(){
+    [].forEach.call(document.querySelectorAll('[data-calc]'),function(b){b.classList.toggle('active',b===btn);});
+    [].forEach.call(document.querySelectorAll('.calc-panel'),function(p){p.classList.toggle('active',p.id==='calc-'+btn.dataset.calc);});
+  });
+});
+
+/* ---------------- publishing ---------------- */
+bindInputs('calc-publishing',function(){
+  var service=n('pStreams')*n('pProxy'), pool=service*n('pRate')/100, performance=pool*n('pPerf')/100,
+      mechanical=Math.max(0,pool-performance), own=n('pOwn')/100, admin=1-n('pAdmin')/100,
+      writer=performance*.5*own, publisher=performance*.5*own*admin, mech=mechanical*own*admin;
+  put('pRevenue',money(service));put('pPool',money(pool));put('pNet',money(writer+publisher+mech));
+});
+
+/* ---------------- performance ---------------- */
+bindInputs('calc-performance',function(){
+  var controlled=n('rPro')*n('rOwn')/100, writer=controlled*.5, pubGross=controlled*.5,
+      publisher=(pubGross-pubGross*n('rSub')/100)*(1-n('rAdmin')/100), sx=n('rSX');
+  put('rWriter',money(writer));put('rPublisher',money(publisher));put('rFeatured',money(sx*.45*n('rArtist')/100));
+  put('rOwner',money(sx*.5));put('rNonfeatured',money(sx*.05));
+});
+
+/* ---------------- podcast ---------------- */
+bindInputs('calc-podcast',function(){
+  var episodes=n('oEpisodes'), downloads=n('oDownloads'), slots=n('oSlots'), cpm=n('oCpm'), fill=n('oFill')/100,
+      gross=episodes*downloads/1000*slots*cpm*fill, netAds=gross*(1-n('oFee')/100),
+      subs=n('oSubs')*n('oSubPrice')*(1-n('oSubFee')/100), video=n('oViews')/1000*n('oRpm'),
+      contribution=netAds+subs+video-n('oCosts'), perDownload=episodes*slots*cpm/1000*fill*(1-n('oFee')/100),
+      breakEven=perDownload>0?Math.max(0,(n('oCosts')-subs-video)/perDownload):0;
+  put('oGross',money(gross));put('oNetAds',money(netAds));put('oContribution',money(contribution));
+  put('oAnnual',money(contribution*12));put('oBreakEven',compact(breakEven));
+});
+
+/* ---------------- touring ---------------- */
+bindInputs('calc-touring',function(){
+  var attendance=n('tShows')*n('tCap')*n('tSell')/100, gross=attendance*n('tTicket'), taxes=gross*n('tTax')/100,
+      promoterCosts=n('tShows')*n('tPromoter'), base=Math.max(0,gross-taxes-promoterCosts), percentage=base*n('tShare')/100,
+      guarantee=n('tShows')*n('tGuarantee'), settlement=Math.max(guarantee,percentage), promoterResult=gross-taxes-promoterCosts-settlement,
+      merch=attendance*n('tMerch')*(1-n('tMerchCut')/100), vip=n('tShows')*n('tVip'), artistGross=settlement+merch+vip+n('tSponsor'),
+      commissions=(settlement+vip+n('tSponsor'))*n('tCommission')/100, production=n('tShows')*n('tProduction'), artistNet=artistGross-commissions-production;
+  put('tAttendance',compact(attendance));put('tGross',money(gross));put('tSettlement',money(settlement));
+  put('tPromoterResult',money(promoterResult));put('tArtistGross',money(artistGross));put('tArtistNet',money(artistNet));
+});
+
+/* ---------------- catalog ---------------- */
+bindInputs('calc-catalog',function(){
+  var cash=n('cCash'), g=n('cGrowth')/100, d=Math.max(n('cDiscount')/100,g+.005), tg=Math.min(n('cTerminal')/100,d-.005),
+      years=Math.max(1,Math.round(n('cYears'))), pv=0, yearCash=cash, y;
+  for(y=1;y<=years;y++){yearCash*=1+g;pv+=yearCash/Math.pow(1+d,y);}
+  var terminal=yearCash*(1+tg)/(d-tg)/Math.pow(1+d,years), dcf=pv+terminal, mult=cash*n('cMultiple'), mid=(dcf+mult)/2,
+      debt=mid*n('cDebtShare')/100, interest=debt*n('cDebtRate')/100, dscr=interest>0?cash*(1+g)/interest:0,
+      r=n('cCoupon')/100, term=Math.max(1,n('cTerm')), af=r===0?term:(1-Math.pow(1+r,-term))/r,
+      service=n('cPrincipal')/af, bondDscr=service>0?n('cBondCash')/service:0;
+  put('cDcf',money(dcf));put('cMultValue',money(mult));put('cMid',money(mid));put('cDscr',dscr.toFixed(2)+'×');
+  put('cDebtService',money(service));put('cBondDscr',bondDscr.toFixed(2)+'×');
+});
+
+/* ---------------- waterfalls ---------------- */
+function waterRow(label,value,max,kind){return '<div class="water-row '+(kind||'')+'"><span>'+label+'</span><span class="water-track"><i style="width:'+Math.min(100,Math.abs(value)/Math.max(max,1)*100)+'%"></i></span><span class="water-val">'+money(value,value<1000?2:0)+'</span></div>';}
+function waterfalls(){
+  var gross=n('wGross'), rec=gross*.8, distribution=rec*.15, label=rec-distribution, royalty=label*.2, hold=royalty*.5, artist=royalty-hold,
+      pub=gross*.2, perf=pub*.45, mech=pub-perf, writer=perf*.5, pubGross=perf*.5+mech, admin=pubGross*.15, pubCash=writer+pubGross-admin,
+      tax=gross*.11, costs=gross*.25, base=gross-tax-costs, settlement=base*.85, team=settlement*.25, show=settlement*.3, live=settlement-team-show;
+  var a=document.getElementById('wRecording'),b=document.getElementById('wPublishing'),c=document.getElementById('wLive');
+  if(a)a.innerHTML=waterRow('Service music revenue',gross,gross)+waterRow('Recording pool',rec,gross)+waterRow('Distribution / service',-distribution,gross,'deduct')+waterRow('Label net',label,gross)+waterRow('Artist royalty',royalty,gross)+waterRow('Recoupment holdback',-hold,gross,'deduct')+waterRow('Artist cash',artist,gross,'net');
+  if(b)b.innerHTML=waterRow('Composition pool',pub,gross)+waterRow('Performance',perf,gross)+waterRow('Mechanical',mech,gross)+waterRow('Writer direct',writer,gross)+waterRow('Publisher gross',pubGross,gross)+waterRow('Administration',-admin,gross,'deduct')+waterRow('Controlled cash',pubCash,gross,'net');
+  if(c)c.innerHTML=waterRow('Ticket gross',gross,gross)+waterRow('Tax / facility',-tax,gross,'deduct')+waterRow('Promoter costs',-costs,gross,'deduct')+waterRow('Artist settlement',settlement,gross)+waterRow('Team commissions',-team,gross,'deduct')+waterRow('Show costs',-show,gross,'deduct')+waterRow('Artist cash',live,gross,'net');
+}
+var wg=document.getElementById('wGross');if(wg)wg.addEventListener('input',waterfalls);waterfalls();
+
+/* ---------------- catalog filtering ---------------- */
+(function(){
+  var search=document.getElementById('catalogSearch'), active='all', buttons=[].slice.call(document.querySelectorAll('[data-cat]'));
+  function run(){var q=search?search.value.toLowerCase().trim():'';[].forEach.call(document.querySelectorAll('#catalogTimeline .event'),function(e){var typeOk=active==='all'||e.dataset.type===active,textOk=!q||(e.dataset.search||'').indexOf(q)>-1;e.classList.toggle('hide',!(typeOk&&textOk));});}
+  buttons.forEach(function(b){b.addEventListener('click',function(){active=b.dataset.cat;buttons.forEach(function(x){x.classList.toggle('active',x===b);});run();});});
+  if(search)search.addEventListener('input',run);
+})();
+
+/* ---------------- venue layouts ---------------- */
+(function(){
+  var copy={end:['End-stage','Most floor and bowl seats face one end. It maximizes production control but kills or discounts seats behind the stage.'],round:['In-the-round','A central stage improves proximity and sellable capacity while making sightlines, audio coverage and backstage access more complex.'],thrust:['Thrust','The performance surface reaches into the audience. It creates intimacy but requires careful camera, monitor and sightline design.'],ga:['Festival / GA','A broad front-of-house field emphasizes throughput, barricade geometry, crowd segmentation, weather planning and screen coverage.'],theater:['Theater','A proscenium or frontal room concentrates sightlines and acoustics but limits capacity and large-scale production geometry.'],immersive:['Immersive','The room becomes the display system. Content, rigging, latency, resolution and seat-specific viewing angles drive the design.']};
+  var arena=document.getElementById('arena'), title=document.getElementById('layoutTitle'), textEl=document.getElementById('layoutText');
+  [].forEach.call(document.querySelectorAll('[data-layout]'),function(btn){btn.addEventListener('click',function(){var key=btn.dataset.layout;[].forEach.call(document.querySelectorAll('[data-layout]'),function(b){b.classList.toggle('active',b===btn);});if(arena)arena.className='arena '+key;if(title)title.textContent=copy[key][0];if(textEl)textEl.textContent=copy[key][1];});});
+})();
+</script>
+</body>
+</html>
